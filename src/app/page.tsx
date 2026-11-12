@@ -1,18 +1,17 @@
-import Button from "@/components/Button";
-import Card from "@/components/Card";
+import ProductCard from "@/components/ProductCard";
+import { products } from "@/lib/products";
 
 export default function Home() {
-  return (
-    <main className="p-8 grid gap-4 md:grid-cols-2">
-      <Card title="Produit 1">
-        <p className="mb-4">Description courte du produit 1</p>
-        <Button label="Acheter" />
-      </Card>
+  const featured = products.slice(0, 3);
 
-      <Card title="Produit 2">
-        <p className="mb-4">Description courte du produit 2</p>
-        <Button label="Détails" variant="secondary" />
-      </Card>
-    </main>
+  return (
+    <div>
+      <h1 className="text-3xl font-bold mb-6">Produits en vedette</h1>
+      <div className="grid gap-4 md:grid-cols-3">
+        {featured.map((product) => (
+          <ProductCard key={product.slug} {...product} />
+        ))}
+      </div>
+    </div>
   );
 }
