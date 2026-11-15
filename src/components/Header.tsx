@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { Suspense } from "react";
+import UserNav from "@/components/UserNav";
 
 export default function Header() {
   return (
@@ -15,12 +17,20 @@ export default function Header() {
           <li>
             <Link href="/products">Produits</Link>
           </li>
-          <li>
-            <Link href="/cart">Panier</Link>
-          </li>
-          <li>
-            <Link href="/login">Connexion</Link>
-          </li>
+          <Suspense
+            fallback={
+              <>
+                <li>
+                  <Link href="/cart">Panier</Link>
+                </li>
+                <li>
+                  <Link href="/login">Connexion</Link>
+                </li>
+              </>
+            }
+          >
+            <UserNav />
+          </Suspense>
         </ul>
       </nav>
     </header>

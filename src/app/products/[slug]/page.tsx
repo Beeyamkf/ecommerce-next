@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProductBySlug, getProducts } from "@/db/queries";
+import { addToCart } from "@/app/actions/cart";
+import SubmitButton from "@/components/SubmitButton";
 
 export async function generateStaticParams() {
   const products = await getProducts();
@@ -40,6 +42,11 @@ export default async function ProductDetailPage({
           {inStock ? `En stock (${product.stock})` : "Épuisé"}
         </p>
 
+        {inStock && (
+          <form action={addToCart.bind(null, product.id)} className="mb-6">
+            <SubmitButton label="Ajouter au panier" />
+          </form>
+        )}
         <Link href="/products" className="text-blue-600 underline">
           ← Retour aux produits
         </Link>
