@@ -1,5 +1,6 @@
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
+import { connection } from "next/server";
 
 export const COOKIE_NAME = "session";
 const secret = new TextEncoder().encode(process.env.JWT_SECRET);
@@ -40,6 +41,7 @@ export async function createSession(payload: SessionPayload) {
 }
 
 export async function getSession() {
+      await connection();
   const cookieStore = await cookies();
   return verifyToken(cookieStore.get(COOKIE_NAME)?.value);
 }
