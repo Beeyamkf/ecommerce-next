@@ -9,6 +9,7 @@ import { getCart } from "@/lib/cart";
 import { logout } from "@/app/actions/auth";
 import Card from "@/components/Card";
 import ProductCard from "@/components/ProductCard";
+import Button from "@/components/Button";
 
 export default async function AccountPage() {
   const session = await getSession();
@@ -45,12 +46,7 @@ export default async function AccountPage() {
             {user.createdAt.toLocaleDateString("fr-DZ")}
           </p>
           <form action={logout}>
-            <button
-              type="submit"
-              className="w-full px-4 py-2 rounded bg-red-600 text-white"
-            >
-              Se déconnecter
-            </button>
+            <Button label="Se déconnecter" variant="danger" type="submit" />
           </form>
         </Card>
 

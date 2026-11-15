@@ -3,6 +3,7 @@ import Card from "@/components/Card";
 import { getCart } from "@/lib/cart";
 import { getProductsByIds } from "@/db/queries";
 import { removeFromCart, clearCart } from "@/app/actions/cart";
+import Button from "@/components/Button";
 
 export default async function CartPage() {
   const cart = await getCart();
@@ -76,12 +77,7 @@ export default async function CartPage() {
         </div>
 
         <form action={clearCart}>
-          <button
-            type="submit"
-            className="w-full px-4 py-2 rounded bg-gray-600 text-white"
-          >
-            Vider le panier
-          </button>
+          <Button label="Vider le panier" variant="secondary" type="submit" />
         </form>
       </Card>
     </div>

@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MyShop — E-commerce Next.js
 
-## Getting Started
+Petit site e-commerce réalisé en une semaine pour apprendre React, les composants réutilisables et le full stack.
 
-First, run the development server:
+## Stack
+
+Next.js 16 (App Router) · React · TypeScript · Tailwind CSS · Drizzle ORM · Zod · PostgreSQL · JWT · Docker Compose · GitHub CLI
+
+## Fonctionnalités
+
+- Liste des produits et page détail (`/products`, `/products/[slug]`)
+- Inscription, connexion, déconnexion (JWT dans un cookie httpOnly)
+- Routes protégées via `proxy.ts`
+- Page compte et panier (stocké dans un cookie)
+- Validation des formulaires avec Zod (côté serveur)
+
+## Prérequis
+
+- Node.js 20+
+- Docker Desktop
+- Git + GitHub CLI (`gh`)
+
+## Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# 1. Cloner le projet
+gh repo clone Beeyamkf/ecommerce-next
+cd ecommerce-next
+
+# 2. Installer les dépendances
+npm install
+
+# 3. Créer le fichier d'environnement
+cp .env.example .env
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Générer un secret JWT et le mettre dans `.env` (`JWT_SECRET=...`) :
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# 4. Démarrer PostgreSQL
+docker compose up -d
 
-## Learn More
+# 5. Créer les tables
+npm run db:migrate
 
-To learn more about Next.js, take a look at the following resources:
+# 6. Ajouter les produits de démo
+npm run db:seed
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# 7. Lancer le site
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Ouvrir http://localhost:3000
 
-## Deploy on Vercel
+## Scripts
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Commande              | Description                                     |
+| --------------------- | ----------------------------------------------- |
+| `npm run dev`         | Serveur de développement                        |
+| `npm run build`       | Build de production                             |
+| `npm run lint`        | Vérification du code (ESLint)                   |
+| `npm run db:generate` | Générer une migration depuis `src/db/schema.ts` |
+| `npm run db:migrate`  | Appliquer les migrations                        |
+| `npm run db:seed`     | Remplir la base avec des produits               |
+| `npm run db:studio`   | Interface web pour voir la base                 |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Structure
+
+```
+src/
+├── app/            # Pages (App Router), layouts, server actions
+├── components/     # Composants réutilisables (Card, ProductCard, Input…)
+├── db/             # Schéma Drizzle, connexion, requêtes, seed
+├── lib/            # Session JWT, mot de passe, panier, validations Zod
+└── proxy.ts        # Protection des routes
+```
+
+## Dépannage
+
+**Le port 5432 est déjà utilisé** (un PostgreSQL est installé sur Windows) : arrêter le service PostgreSQL de Windows, ou changer le port dans `docker-compose.yml` (`"5433:5432"`) et dans `DATABASE_URL`.
+
+## Workflow Git
+
+Chaque fonctionnalité est développée sur une branche, puis fusionnée avec le GitHub CLI :
+
+```bash
+git checkout main && git pull
+git checkout -b feat/ma-fonctionnalite
+git add .
+git commit -m "feat: ..."
+git push -u origin feat/ma-fonctionnalite
+gh pr create --title "..." --body "..."
+gh pr merge --squash --delete-branch
+```
