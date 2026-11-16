@@ -12,14 +12,14 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "MyShop",
-  description: "Petit site e-commerce avec Next.js",
+  description: "Small e-commerce site with Next.js",
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="fr">
+    <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >

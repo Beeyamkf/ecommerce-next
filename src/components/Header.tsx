@@ -4,27 +4,50 @@ import UserNav from "@/components/UserNav";
 
 export default function Header() {
   return (
-    <header className="border-b">
-      <nav className="max-w-6xl mx-auto flex items-center justify-between p-4">
-        <Link href="/" className="text-2xl font-bold">
-          MyShop
+    <header className="sticky top-0 z-20 bg-linear-to-r from-blue-600 to-indigo-600 text-white shadow-lg">
+      <nav className="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
+        <Link
+          href="/"
+          className="flex items-center gap-2 text-2xl font-extrabold tracking-tight"
+        >
+          <span className="text-3xl">🛍️</span> MyShop
         </Link>
 
-        <ul className="flex gap-6">
+        <ul className="flex items-center gap-2 font-medium">
           <li>
-            <Link href="/">Accueil</Link>
+            <Link
+              href="/"
+              className="px-3 py-2 rounded-lg hover:bg-white/15 transition"
+            >
+              Home
+            </Link>
           </li>
           <li>
-            <Link href="/products">Produits</Link>
+            <Link
+              href="/products"
+              className="px-3 py-2 rounded-lg hover:bg-white/15 transition"
+            >
+              Products
+            </Link>
           </li>
           <Suspense
             fallback={
               <>
                 <li>
-                  <Link href="/cart">Panier</Link>
+                  <Link
+                    href="/cart"
+                    className="px-3 py-2 rounded-lg hover:bg-white/15 transition"
+                  >
+                    🛒 Cart
+                  </Link>
                 </li>
                 <li>
-                  <Link href="/login">Connexion</Link>
+                  <Link
+                    href="/login"
+                    className="px-4 py-2 rounded-lg bg-white text-blue-600 font-semibold"
+                  >
+                    Sign in
+                  </Link>
                 </li>
               </>
             }

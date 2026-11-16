@@ -9,6 +9,7 @@ import { getCart } from "@/lib/cart";
 import { logout } from "@/app/actions/auth";
 import Card from "@/components/Card";
 import ProductCard from "@/components/ProductCard";
+import Button from "@/components/Button";
 
 export default async function AccountPage() {
   const session = await getSession();
@@ -33,41 +34,36 @@ export default async function AccountPage() {
   return (
     <div className="space-y-8 mt-8">
       <div className="grid gap-4 md:grid-cols-2">
-        <Card title="Mon compte">
+        <Card title="My account">
           <p className="mb-2">
-            <span className="font-semibold">Nom :</span> {user.name}
+            <span className="font-semibold">Name :</span> {user.name}
           </p>
           <p className="mb-2">
             <span className="font-semibold">Email :</span> {user.email}
           </p>
           <p className="mb-6">
-            <span className="font-semibold">Membre depuis :</span>{" "}
+            <span className="font-semibold">Member since :</span>{" "}
             {user.createdAt.toLocaleDateString("fr-DZ")}
           </p>
           <form action={logout}>
-            <button
-              type="submit"
-              className="w-full px-4 py-2 rounded bg-red-600 text-white"
-            >
-              Se déconnecter
-            </button>
+            <Button label="Sign out " variant="danger" type="submit" />
           </form>
         </Card>
 
-        <Card title="Mon panier">
+        <Card title="My cart ">
           <p className="mb-4">
             {cartCount === 0
-              ? "Votre panier est vide."
-              : `Vous avez ${cartCount} article(s) dans votre panier.`}
+              ? "Your cart is empty."
+              : `You have ${cartCount} item(s) in your cart.`}
           </p>
           <Link href="/cart" className="text-blue-600 underline">
-            Voir le panier
+            View cart
           </Link>
         </Card>
       </div>
 
       <div>
-        <h2 className="text-2xl font-bold mb-4">Recommandés pour vous</h2>
+        <h2 className="text-2xl font-bold mb-4">Recommended for you</h2>
         <div className="grid gap-4 md:grid-cols-3">
           {recommended.map((product) => (
             <ProductCard key={product.id} {...product} />

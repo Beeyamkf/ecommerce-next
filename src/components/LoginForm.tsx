@@ -19,7 +19,7 @@ export default function LoginForm() {
         errors={state?.errors?.email}
       />
       <Input
-        label="Mot de passe"
+        label="Passsword"
         name="password"
         type="password"
         errors={state?.errors?.password}
@@ -27,12 +27,12 @@ export default function LoginForm() {
 
       {state?.message && <p className="text-red-500 mb-4">{state.message}</p>}
 
-      <SubmitButton label="Se connecter" />
+      <SubmitButton label="Sign in " />
 
       <p className="mt-4 text-sm text-center">
-        Pas encore de compte ?{" "}
+        Don't have an account ?{" "}
         <Link href="/register" className="text-blue-600 underline">
-          Créer un compte
+          Create one
         </Link>
       </p>
     </form>
