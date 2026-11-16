@@ -7,7 +7,7 @@ export default async function Home() {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-6">Produits en vedette</h1>
+      <h1 className="text-3xl font-bold mb-6">Featured products</h1>
       <div className="grid gap-4 md:grid-cols-3">
         {featured.map((product) => (
           <ProductCard key={product.id} {...product} />

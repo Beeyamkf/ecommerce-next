@@ -19,7 +19,7 @@ export default function Header() {
               href="/"
               className="px-3 py-2 rounded-lg hover:bg-white/15 transition"
             >
-              Accueil
+              Home
             </Link>
           </li>
           <li>
@@ -27,7 +27,7 @@ export default function Header() {
               href="/products"
               className="px-3 py-2 rounded-lg hover:bg-white/15 transition"
             >
-              Produits
+              Products
             </Link>
           </li>
           <Suspense
@@ -38,7 +38,7 @@ export default function Header() {
                     href="/cart"
                     className="px-3 py-2 rounded-lg hover:bg-white/15 transition"
                   >
-                    🛒 Panier
+                    🛒 Cart
                   </Link>
                 </li>
                 <li>
@@ -46,7 +46,7 @@ export default function Header() {
                     href="/login"
                     className="px-4 py-2 rounded-lg bg-white text-blue-600 font-semibold"
                   >
-                    Connexion
+                    Sign in
                   </Link>
                 </li>
               </>

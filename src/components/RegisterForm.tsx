@@ -12,7 +12,7 @@ export default function RegisterForm() {
   return (
     <form action={action}>
       <Input
-        label="Nom"
+        label="Name"
         name="name"
         placeholder="Ahmed"
         errors={state?.errors?.name}
@@ -25,7 +25,7 @@ export default function RegisterForm() {
         errors={state?.errors?.email}
       />
       <Input
-        label="Mot de passe"
+        label="Password"
         name="password"
         type="password"
         errors={state?.errors?.password}
@@ -33,12 +33,12 @@ export default function RegisterForm() {
 
       {state?.message && <p className="text-red-500 mb-4">{state.message}</p>}
 
-      <SubmitButton label="Créer mon compte" />
+      <SubmitButton label="Create my account " />
 
       <p className="mt-4 text-sm text-center">
-        Déjà un compte ?{" "}
+        Already have an account ?{" "}
         <Link href="/login" className="text-blue-600 underline">
-          Se connecter
+          Sign in
         </Link>
       </p>
     </form>

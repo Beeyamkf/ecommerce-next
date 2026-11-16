@@ -3,20 +3,20 @@ import { db } from "./index";
 import { products } from "./schema";
 
 async function main() {
-  console.log("Seed en cours...");
+  console.log("Seeding...");
 
   await db.delete(products);
 
   await db.insert(products).values([
-    { name: "T-shirt noir", slug: "t-shirt-noir", description: "T-shirt en coton, confortable pour tous les jours.", price: 2500, stock: 20 },
-    { name: "Casquette", slug: "casquette", description: "Casquette réglable, style sport.", price: 1500, stock: 35 },
-    { name: "Sneakers", slug: "sneakers", description: "Baskets légères et respirantes.", price: 9000, stock: 10 },
-    { name: "Sac à dos", slug: "sac-a-dos", description: "Sac résistant de 20 litres, idéal pour le travail.", price: 4500, stock: 15 },
-    { name: "Montre", slug: "montre", description: "Montre simple et élégante, bracelet cuir.", price: 7000, stock: 8 },
-    { name: "Lunettes de soleil", slug: "lunettes-de-soleil", description: "Protection UV400, monture légère.", price: 3000, stock: 0 },
+      { name: "Black T-shirt", slug: "t-shirt-noir", description: "Cotton T-shirt, comfortable for everyday wear.", price: 2500, stock: 20 },
+    { name: "Cap", slug: "casquette", description: "Adjustable cap, sporty style.", price: 1500, stock: 35 },
+    { name: "Sneakers", slug: "sneakers", description: "Light and breathable sneakers.", price: 9000, stock: 10 },
+    { name: "Backpack", slug: "sac-a-dos", description: "Durable 20-liter backpack, perfect for work.", price: 4500, stock: 15 },
+    { name: "Watch", slug: "montre", description: "Simple and elegant watch with leather strap.", price: 7000, stock: 8 },
+    { name: "Sunglasses", slug: "lunettes-de-soleil", description: "UV400 protection, lightweight frame.", price: 3000, stock: 0 },
   ]);
 
-  console.log("✅ Seed terminé : 6 produits ajoutés");
+  console.log("✅ Seed done: 6 products added");
   await db.$client.end();
 }
 

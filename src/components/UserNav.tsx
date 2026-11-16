@@ -13,7 +13,7 @@ export default async function UserNav() {
           href="/cart"
           className="flex items-center gap-1 px-3 py-2 rounded-lg hover:bg-white/15 transition"
         >
-          🛒 Panier
+          🛒 Cart
           {count > 0 && (
             <span className="ml-1 min-w-6 h-6 px-2 flex items-center justify-center rounded-full bg-amber-400 text-blue-900 text-xs font-bold">
               {count}
@@ -26,7 +26,7 @@ export default async function UserNav() {
           href={session ? "/account" : "/login"}
           className="px-4 py-2 rounded-lg bg-white text-blue-600 font-semibold hover:bg-blue-50 transition"
         >
-          {session ? "👤 Mon compte" : "Connexion"}
+          {session ? "👤 My account " : "Sign in "}
         </Link>
       </li>
     </>

@@ -39,16 +39,16 @@ export default async function ProductDetailPage({
         <p
           className={`mb-6 font-semibold ${inStock ? "text-green-600" : "text-red-600"}`}
         >
-          {inStock ? `En stock (${product.stock})` : "Épuisé"}
+          {inStock ? `In stock (${product.stock})` : "Out of stock"}
         </p>
 
         {inStock && (
           <form action={addToCart.bind(null, product.id)} className="mb-6">
-            <SubmitButton label="Ajouter au panier" />
+            <SubmitButton label="Add to cart " />
           </form>
         )}
         <Link href="/products" className="text-blue-600 underline">
-          ← Retour aux produits
+          ← Back to products
         </Link>
       </div>
     </div>

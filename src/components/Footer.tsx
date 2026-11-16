@@ -9,24 +9,24 @@ export default async function Footer() {
       <div className="max-w-6xl mx-auto px-4 py-8 grid gap-6 md:grid-cols-3">
         <div>
           <p className="text-xl font-extrabold text-white mb-2">🛍️ MyShop</p>
-          <p className="text-sm">Votre boutique en ligne simple et rapide.</p>
+          <p className="text-sm">Your simple and fast online store.</p>
         </div>
         <div>
           <p className="font-semibold text-white mb-2">Navigation</p>
           <ul className="space-y-1 text-sm">
             <li>
               <Link href="/products" className="hover:text-white">
-                Produits
+                Products
               </Link>
             </li>
             <li>
               <Link href="/cart" className="hover:text-white">
-                Panier
+                Cart
               </Link>
             </li>
             <li>
               <Link href="/account" className="hover:text-white">
-                Mon compte
+                My account
               </Link>
             </li>
           </ul>
@@ -37,7 +37,7 @@ export default async function Footer() {
         </div>
       </div>
       <div className="border-t border-slate-800 py-4 text-center text-sm">
-        © {year} MyShop. Tous droits réservés.
+        © {year} MyShop. All rights reserved.
       </div>
     </footer>
   );
