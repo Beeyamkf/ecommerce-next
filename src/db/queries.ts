@@ -1,4 +1,4 @@
-import {and , eq, inArray } from "drizzle-orm";
+import { and, desc, eq, inArray, sql } from "drizzle-orm";
 import { db } from "./index";
 import { products, orders, orderItems } from "./schema";
 import { cacheTag } from "next/cache";
@@ -49,4 +49,20 @@ export async function getOrder(orderId: number, userId: number) {
     .where(eq(orderItems.orderId, orderId));
 
   return { ...order, items };
+}
+
+export async function getUserOrders(userId: number) {
+  return db
+    .select({
+      id: orders.id,
+      total: orders.total,
+      status: orders.status,
+      createdAt: orders.createdAt,
+      itemCount: sql<number>`coalesce(sum(${orderItems.quantity}), 0)::int`,
+    })
+    .from(orders)
+    .leftJoin(orderItems, eq(orderItems.orderId, orders.id))
+    .where(eq(orders.userId, userId))
+    .groupBy(orders.id)
+    .orderBy(desc(orders.createdAt));
 }
