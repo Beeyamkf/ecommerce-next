@@ -4,6 +4,7 @@ import { getCart } from "@/lib/cart";
 import { productEmoji } from "@/lib/product-emoji";
 import { getProductsByIds } from "@/db/queries";
 import { removeFromCart, clearCart, updateQuantity } from "@/app/actions/cart";
+import PlaceOrderForm from "@/components/PlaceOrderForm";
 
 export default async function CartPage() {
   const cart = await getCart();
@@ -138,15 +139,16 @@ export default async function CartPage() {
             </span>
           </div>
 
-          <form action={clearCart} className="mb-3">
-            <Button label="Clear cart" variant="secondary" type="submit" />
-          </form>
           <Link
             href="/products"
             className="block text-center text-blue-600 font-medium hover:underline"
           >
             ← Continue shopping
           </Link>
+          <PlaceOrderForm />
+          <form action={clearCart} className="mb-3">
+            <Button label="Clear cart" variant="secondary" type="submit" />
+          </form>
         </aside>
       </div>
     </div>

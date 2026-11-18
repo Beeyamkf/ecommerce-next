@@ -8,6 +8,13 @@
       "when": 1794495181355,
       "tag": "0000_perfect_pepper_potts",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1794908882566,
+      "tag": "0001_moaning_shaman",
+      "breakpoints": true
     }
   ]
 }
