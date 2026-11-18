@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { COOKIE_NAME, verifyToken } from "@/lib/session";
 
-const protectedRoutes = ["/account"];
+const protectedRoutes = ["/account", "/orders"];
 const authRoutes = ["/login", "/register"];
 
 export async function proxy(request: NextRequest) {
@@ -24,5 +24,4 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/account/:path*", "/login", "/register"],
-};
+  matcher: ["/account/:path*", "/orders/:path*", "/login", "/register"],};
