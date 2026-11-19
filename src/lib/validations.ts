@@ -15,8 +15,8 @@ export const productSchema = z.object({
   name: z.string().min(2, "Name is too short"),
   slug: z.string().regex(/^[a-z0-9-]+$/, "Slug : lowercase letters, numbers and dashes only"),
   description: z.string().min(10, "Description is too short"),
-  price: z.number().int().positive("Price must be positive"),
-  stock: z.number().int().min(0).default(0),
+  price: z.coerce.number().int().positive("Price must be positive"),
+  stock: z.coerce.number().int().min(0, "Stock cannot be negative"),
 });
 
 export type RegisterInput = z.infer<typeof registerSchema>;

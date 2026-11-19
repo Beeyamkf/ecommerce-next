@@ -1,8 +1,9 @@
 type InputProps = {
   label: string;
   name: string;
-  type?: "text" | "email" | "password";
+  type?: "text" | "email" | "password" | "number";
   placeholder?: string;
+  defaultValue?: string | number;
   errors?: string[];
 };
 
@@ -11,6 +12,7 @@ export default function Input({
   name,
   type = "text",
   placeholder,
+  defaultValue,
   errors,
 }: InputProps) {
   return (
@@ -23,6 +25,7 @@ export default function Input({
         name={name}
         type={type}
         placeholder={placeholder}
+        defaultValue={defaultValue}
         className={`w-full border rounded px-3 py-2 bg-transparent ${
           errors ? "border-red-500" : "border-gray-400"
         }`}

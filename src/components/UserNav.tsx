@@ -1,13 +1,23 @@
 import Link from "next/link";
-import { getSession } from "@/lib/session";
+import { getCurrentUser } from "@/lib/auth";
 import { getCart } from "@/lib/cart";
 
 export default async function UserNav() {
-  const [session, cart] = await Promise.all([getSession(), getCart()]);
+  const [user, cart] = await Promise.all([getCurrentUser(), getCart()]);
   const count = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <>
+      {user?.role === "admin" && (
+        <li>
+          <Link
+            href="/admin"
+            className="px-3 py-2 rounded-lg bg-amber-400 text-blue-900 font-semibold hover:bg-amber-300 transition"
+          >
+            🛠️ Admin
+          </Link>
+        </li>
+      )}
       <li>
         <Link
           href="/cart"
@@ -23,10 +33,10 @@ export default async function UserNav() {
       </li>
       <li>
         <Link
-          href={session ? "/account" : "/login"}
+          href={user ? "/account" : "/login"}
           className="px-4 py-2 rounded-lg bg-white text-blue-600 font-semibold hover:bg-blue-50 transition"
         >
-          {session ? "👤 My account " : "Sign in "}
+          {user ? "👤 My account" : "Sign in"}
         </Link>
       </li>
     </>

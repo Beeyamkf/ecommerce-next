@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { COOKIE_NAME, verifyToken } from "@/lib/session";
 
-const protectedRoutes = ["/account", "/orders"];
+const protectedRoutes = ["/account", "/orders", "/admin"];
 const authRoutes = ["/login", "/register"];
 
 export async function proxy(request: NextRequest) {

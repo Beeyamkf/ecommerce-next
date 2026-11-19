@@ -7,6 +7,10 @@ import { db } from "@/db";
 import { orders, orderItems, products } from "@/db/schema";
 import { getSession } from "@/lib/session";
 import { getCart, saveCart } from "@/lib/cart";
+import { revalidatePath } from "next/cache";
+import { z } from "zod";
+import { requireAdmin } from "@/lib/auth";
+import { ORDER_STATUSES } from "@/lib/order-status";
 
 export type OrderState = { message?: string } | undefined;
 
@@ -76,4 +80,14 @@ export async function placeOrder(prevState: OrderState, formData: FormData): Pro
   updateTag("products");
 
   redirect(`/orders/${orderId}`);
+}
+
+export async function updateOrderStatus(orderId: number, formData: FormData) {
+  await requireAdmin();
+
+  const status = z.enum(ORDER_STATUSES).parse(formData.get("status"));
+
+  await db.update(orders).set({ status }).where(eq(orders.id, orderId));
+
+  revalidatePath("/admin/orders");
 }
