@@ -11,6 +11,23 @@ services:
       - "${POSTGRES_PORT:-5432}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+  app:
+    profiles: ["app"]
+    build:
+      context: .
+      network: host
+      args:
+        DATABASE_URL: ${DATABASE_URL}
+    container_name: ecommerce-app
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@postgres:5432/ecommerce
+      JWT_SECRET: ${JWT_SECRET}
+      COOKIE_SECURE: ${COOKIE_SECURE:-false}
+    ports:
+      - "${APP_PORT:-3000}:3000"
+    depends_on:
+      - postgres
 
 volumes:
   postgres_data:
