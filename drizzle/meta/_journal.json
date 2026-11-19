@@ -15,6 +15,13 @@
       "when": 1794908882566,
       "tag": "0001_moaning_shaman",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1795005254307,
+      "tag": "0002_moaning_red_hulk",
+      "breakpoints": true
     }
   ]
 }

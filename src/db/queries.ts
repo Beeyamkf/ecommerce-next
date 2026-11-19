@@ -1,7 +1,8 @@
 import { and, desc, eq, inArray, sql } from "drizzle-orm";
 import { db } from "./index";
-import { products, orders, orderItems } from "./schema";
+import { products, orders, orderItems, users } from "./schema";
 import { cacheTag } from "next/cache";
+
 
 export async function getProducts() {
   "use cache";
@@ -64,5 +65,22 @@ export async function getUserOrders(userId: number) {
     .leftJoin(orderItems, eq(orderItems.orderId, orders.id))
     .where(eq(orders.userId, userId))
     .groupBy(orders.id)
+    .orderBy(desc(orders.createdAt));
+}
+
+export async function getAllOrders() {
+  return db
+    .select({
+      id: orders.id,
+      total: orders.total,
+      status: orders.status,
+      createdAt: orders.createdAt,
+      customer: users.email,
+      itemCount: sql<number>`coalesce(sum(${orderItems.quantity}), 0)::int`,
+    })
+    .from(orders)
+    .innerJoin(users, eq(users.id, orders.userId))
+    .leftJoin(orderItems, eq(orderItems.orderId, orders.id))
+    .groupBy(orders.id, users.email)
     .orderBy(desc(orders.createdAt));
 }
